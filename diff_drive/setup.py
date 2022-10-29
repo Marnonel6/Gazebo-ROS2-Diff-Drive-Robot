@@ -9,14 +9,17 @@ setup(
     data_files=[
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
-        ('share/' + package_name, ['package.xml']),
-    ],
+        ('share/' + package_name, ['package.xml',
+                                    'launch/ddrive_rviz.launch.py',
+                                    'urdf/ddrive.urdf.xacro',
+                                    'config/ddrive.yaml']),
+                ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='marno',
+    maintainer='Marno Nel',
     maintainer_email='marnonel2023@u.northwestern.edu',
     description='TODO: Package description',
-    license='TODO: License declaration',
+    license='MIT',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
