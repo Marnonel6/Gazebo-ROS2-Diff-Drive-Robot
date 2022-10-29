@@ -10,103 +10,87 @@
 <xacro:property name="stem_lenght"  value="${platform_height-wheel_radius-wheel_radius-0.2-0.41-0.1}" />
 
 
+<xacro:macro name="wheel" params="prefix reflect">
+    <link name="${prefix}_wheel">
+        <visual>
+            <geometry>
+                <cylinder length="0.1" radius="0.3"/>
+            </geometry>
+            <!-- <origin xyz="0 0 -${leglen/2}" rpy="0 ${pi/2} 0"/> -->
+            <!-- <material name="white"/> -->
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder length="0.1" radius="0.3"/>
+            </geometry>
+            <!-- <origin xyz="0 0 -${leglen/2}" rpy="0 ${pi/2} 0"/> -->
+        </collision>
+        <!-- <xacro:default_inertial mass="10"/> -->
+    </link>
+
+    <joint name="base_link_to_${prefix}_wheel" type="continuous">
+        <parent link="base_link"/>
+        <child link="${prefix}_wheel"/>
+        <axis xyz="0 0 1"/>
+        <origin rpy="0 1.57075 0" xyz="${reflect*(0.8/2 + 0.1/2)} ${0.2/2 + stem_lenght/2} 0"/>
+    </joint>
+</xacro:macro>
 
 
-  <link name="Platform">
-    <visual>
-      <geometry>
-        <cylinder length="0.1" radius="0.4"/>
-      </geometry>
-      <origin rpy="0 0 1.57075" xyz="0 0 0"/>
-    </visual>
-    <collision>
-      <geometry>
-        <cylinder length="0.1" radius="0.4"/>
-      </geometry>
-      <origin rpy="0 0 1.57075" xyz="0 0 0"/>
-    </collision>
-  </link>
 
-  <link name="Neck">
-    <visual>
-      <geometry>
-        <cylinder length="0.41" radius="0.05"/>
-      </geometry>
-    </visual>
-    <collision>
-      <geometry>
-        <cylinder length="0.41" radius="0.05"/>
-      </geometry>
-    </collision>
-  </link>
+<xacro:macro name="caster" params="prefix reflect">
+    <link name="${prefix}_caster">
+        <visual>
+            <geometry>
+                <cylinder length="0.1" radius="0.1"/>
+            </geometry>
+            <!-- <origin xyz="0 0 -${leglen/2}" rpy="0 ${pi/2} 0"/> -->
+            <!-- <material name="white"/> -->
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder length="0.1" radius="0.1"/>
+            </geometry>
+            <!-- <origin xyz="0 0 -${leglen/2}" rpy="0 ${pi/2} 0"/> -->
+        </collision>
+        <!-- <xacro:default_inertial mass="10"/> -->
+    </link>
 
-  <joint name="Neck_to_Platform" type="revolute">
-    <parent link="Neck"/>
-    <child link="Platform"/>
-    <origin xyz="0 0 ${0.1/2 + 0.41/2}"/>
-    <axis xyz="1 0 0"/>
-    <limit effort="1000.0" lower="-1.1" upper="1.1" velocity="0.5"/>
-  </joint>
+    <joint name="base_link_to_${prefix}_caster" type="continuous">
+        <parent link="base_link"/>
+        <child link="${prefix}_caster"/>
+        <axis xyz="0 0 1"/>
+        <origin rpy="0 1.57075 0" xyz="0 -${0.2/2 + stem_lenght/2 + 0.1} ${reflect*(0.2/2 + 0.1)}"/>
+    </joint>
+
+    <joint name="base_link_to_${prefix}_caster_turn" type="continuous">
+        <parent link="base_link"/>
+        <child link="${prefix}_caster"/>
+        <axis xyz="1 0 0"/>
+        <origin rpy="0 1.57075 0" xyz="0 -${0.2/2 + stem_lenght/2 + 0.1} ${reflect*(0.2/2 + 0.1)}"/>
+    </joint>
+</xacro:macro>
+
+
 
   <link name="base_link">
     <visual>
       <geometry>
-        <box size="0.6 0.4 0.2"/>
+        <box size="0.8 1.5 0.2"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <box size="0.6 0.4 0.2"/>
+        <box size="0.8 1.5 0.2"/>
       </geometry>
     </collision>
   </link>
 
-  <joint name="base_link_to_Neck" type="fixed">
-    <parent link="base_link"/>
-    <child link="Neck"/>
-    <origin xyz="0 0 ${0.2/2 + 0.41/2}"/>
-  </joint>
 
-  <link name="stem">
-    <visual>
-      <geometry>
-        <cylinder length="${stem_lenght}" radius="0.1"/>
-      </geometry>
-    </visual>
-    <collision>
-      <geometry>
-        <cylinder length="${stem_lenght}" radius="0.1"/>
-      </geometry>
-    </collision>
-  </link>
+<xacro:wheel prefix="right" reflect="1" />
+<xacro:wheel prefix="left" reflect="-1" />
 
-  <joint name="base_link_to_stem" type="continuous">
-    <parent link="base_link"/>
-    <child link="stem"/>
-    <axis xyz="0 0 -1"/>
-    <origin xyz="0 0 -${0.2/2 + stem_lenght/2}"/>
-  </joint>
-
-  <link name="wheel">
-    <visual>
-      <geometry>
-        <cylinder length="0.1" radius="${wheel_radius}"/>
-      </geometry>
-      <origin rpy="0 1.57075 0" xyz="0 0 0"/>
-    </visual>
-    <collision>
-      <geometry>
-        <cylinder length="0.1" radius="${wheel_radius}"/>
-      </geometry>
-      <origin rpy="0 1.57075 0" xyz="0 0 0"/>
-    </collision>
-  </link>
-
-  <joint name="stem_to_wheel" type="continuous">
-    <parent link="stem"/>
-    <child link="wheel"/>
-    <axis xyz="1 0 0"/>
-    <origin xyz="0 0 -${wheel_radius + (stem_lenght/2)}"/>
-  </joint>
+<xacro:caster prefix="top" reflect="1" />
+<xacro:caster prefix="bottom" reflect="-1" />
 
 </robot>

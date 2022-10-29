@@ -12,6 +12,7 @@ setup(
         ('share/' + package_name, ['package.xml',
                                     'launch/ddrive_rviz.launch.py',
                                     'urdf/ddrive.urdf.xacro',
+                                    'config/ddrive_urdf.rviz',
                                     'config/ddrive.yaml']),
                 ],
     install_requires=['setuptools'],

@@ -10,7 +10,7 @@ from launch_ros.parameter_descriptions import ParameterValue
 def generate_launch_description():
     urdf_tutorial_path = get_package_share_path('diff_drive')
     default_model_path = urdf_tutorial_path / 'ddrive.urdf.xacro'
-    # default_rviz_config_path = urdf_tutorial_path / 'turtle_urdf.rviz'
+    default_rviz_config_path = urdf_tutorial_path / 'ddrive_urdf.rviz'
 
     use_jsp = DeclareLaunchArgument(
         name='use_jsp',
@@ -22,10 +22,10 @@ def generate_launch_description():
         description='Flag to choose joint_state_publisher')
     model_arg = DeclareLaunchArgument(name='model', default_value=str(
         default_model_path), description='Absolute path to robot urdf file')
-    # rviz_arg = DeclareLaunchArgument(
-    #     name='rvizconfig',
-    #     default_value=str(default_rviz_config_path),
-    #     description='Absolute path to rviz config file')
+    rviz_arg = DeclareLaunchArgument(
+        name='rvizconfig',
+        default_value=str(default_rviz_config_path),
+        description='Absolute path to rviz config file')
     robot_description = ParameterValue(
         Command(['xacro ', LaunchConfiguration('model')]), value_type=str)
 
@@ -53,14 +53,14 @@ def generate_launch_description():
         package='rviz2',
         executable='rviz2',
         name='rviz2',
-        output='screen'
-        # arguments=['-d', LaunchConfiguration('rvizconfig')],
+        output='screen',
+        arguments=['-d', LaunchConfiguration('rvizconfig')],
     )
 
     return LaunchDescription([
         use_jsp,
         model_arg,
-        # rviz_arg,
+        rviz_arg,
         joint_state_publisher_node,
         joint_state_publisher_gui_node,
         robot_state_publisher_node,
