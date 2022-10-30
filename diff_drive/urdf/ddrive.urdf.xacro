@@ -5,9 +5,42 @@
 <xacro:property name="props" value="${load_yaml(yaml_file)}" />
 <xacro:property name="start"  value="${props['/**']}" />
 <xacro:property name="ros__parameters"  value="${start['ros__parameters']}" />
+
 <xacro:property name="platform_height"  value="${ros__parameters['platform_height']}" />
+
 <xacro:property name="wheel_radius"  value="${ros__parameters['wheel_radius']}" />
+<xacro:property name="wheel_length"  value="${ros__parameters['wheel_length']}" />
+<xacro:property name="wheel_mass"  value="${ros__parameters['wheel_mass']}" />
+<xacro:property name="caster_radius"  value="${ros__parameters['caster_radius']}" />
+<xacro:property name="caster_length"  value="${ros__parameters['caster_length']}" />
+<xacro:property name="caster_mass"  value="${ros__parameters['caster_mass']}" />
+<xacro:property name="body_x"  value="${ros__parameters['body_x']}" />
+<xacro:property name="body_y"  value="${ros__parameters['body_y']}" />
+<xacro:property name="body_z"  value="${ros__parameters['body_z']}" />
+<xacro:property name="body_mass"  value="${ros__parameters['body_mass']}" />
+
+
 <xacro:property name="stem_lenght"  value="${platform_height-wheel_radius-wheel_radius-0.2-0.41-0.1}" />
+
+
+
+<xacro:macro name="wheel_inertial" params="mass">
+    <inertial>
+            <mass value="${mass}" />
+            <inertia ixx="1e-3" ixy="0.0" ixz="0.0"
+                 iyy="1e-3" iyz="0.0"
+                 izz="1e-3" />
+    </inertial>
+</xacro:macro>
+
+<xacro:macro name="caster_inertial" params="mass">
+    <inertial>
+            <mass value="${mass}" />
+            <inertia ixx="1e-3" ixy="0.0" ixz="0.0"
+                 iyy="1e-3" iyz="0.0"
+                 izz="1e-3" />
+    </inertial>
+</xacro:macro>
 
 
 <xacro:macro name="wheel" params="prefix reflect">
@@ -21,18 +54,18 @@
         </visual>
         <collision>
             <geometry>
-                <cylinder length="0.1" radius="0.3"/>
+                <cylinder length="${wheel_length}" radius="${wheel_radius}"/>
             </geometry>
             <!-- <origin xyz="0 0 -${leglen/2}" rpy="0 ${pi/2} 0"/> -->
         </collision>
-        <!-- <xacro:default_inertial mass="10"/> -->
+        <xacro:wheel_inertial mass="${wheel_mass}"/>
     </link>
 
     <joint name="base_link_to_${prefix}_wheel" type="continuous">
         <parent link="base_link"/>
         <child link="${prefix}_wheel"/>
         <axis xyz="0 0 1"/>
-        <origin rpy="0 1.57075 0" xyz="${reflect*(0.8/2 + 0.1/2)} ${0.2/2 + stem_lenght/2} 0"/>
+        <origin rpy="0 1.57075 0" xyz="${reflect*(body_x/2 + wheel_length/2)} ${body_x/2} 0"/>
     </joint>
 </xacro:macro>
 
@@ -45,29 +78,29 @@
                 <cylinder length="0.1" radius="0.1"/>
             </geometry>
             <!-- <origin xyz="0 0 -${leglen/2}" rpy="0 ${pi/2} 0"/> -->
-            <!-- <material name="white"/> -->
+            <material name="white"/>
         </visual>
         <collision>
             <geometry>
-                <cylinder length="0.1" radius="0.1"/>
+                <cylinder length="${caster_length}" radius="${caster_radius}"/>
             </geometry>
             <!-- <origin xyz="0 0 -${leglen/2}" rpy="0 ${pi/2} 0"/> -->
         </collision>
-        <!-- <xacro:default_inertial mass="10"/> -->
+        <xacro:caster_inertial mass="${caster_mass}"/>
     </link>
 
     <joint name="base_link_to_${prefix}_caster" type="continuous">
         <parent link="base_link"/>
         <child link="${prefix}_caster"/>
         <axis xyz="0 0 1"/>
-        <origin rpy="0 1.57075 0" xyz="0 -${0.2/2 + stem_lenght/2 + 0.1} ${reflect*(0.2/2 + 0.1)}"/>
+        <origin rpy="0 1.57075 0" xyz="0 -${body_x/2 + caster_radius*2} ${reflect*(body_z/2 + caster_radius)}"/>
     </joint>
 
     <joint name="base_link_to_${prefix}_caster_turn" type="continuous">
         <parent link="base_link"/>
         <child link="${prefix}_caster"/>
         <axis xyz="1 0 0"/>
-        <origin rpy="0 1.57075 0" xyz="0 -${0.2/2 + stem_lenght/2 + 0.1} ${reflect*(0.2/2 + 0.1)}"/>
+        <origin rpy="0 1.57075 0" xyz="0 -${body_x/2 + caster_radius*2} ${reflect*(body_z/2 + caster_radius)}"/>
     </joint>
 </xacro:macro>
 
@@ -76,14 +109,15 @@
   <link name="base_link">
     <visual>
       <geometry>
-        <box size="0.8 1.5 0.2"/>
+        <box size="${body_x} ${body_y} ${body_z}"/>
       </geometry>
     </visual>
     <collision>
       <geometry>
-        <box size="0.8 1.5 0.2"/>
+        <box size="${body_x} ${body_y} ${body_z}"/>
       </geometry>
     </collision>
+    <xacro:caster_inertial mass="${body_mass}"/>
   </link>
 
 
