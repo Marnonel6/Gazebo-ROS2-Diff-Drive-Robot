@@ -89,14 +89,16 @@
     <link name="${prefix}_caster">
         <visual>
             <geometry>
-                <cylinder length="0.1" radius="0.1"/>
+                <!-- <cylinder length="0.1" radius="0.1"/> -->
+                <sphere radius="${caster_radius}"/>
             </geometry>
             <!-- <origin xyz="0 0 -${leglen/2}" rpy="0 ${pi/2} 0"/> -->
             <material name = "${color}" />
         </visual>
         <collision>
             <geometry>
-                <cylinder length="${caster_length}" radius="${caster_radius}"/>
+                <!-- <cylinder length="${caster_length}" radius="${caster_radius}"/> -->
+                <sphere radius="${caster_radius}"/>
             </geometry>
             <!-- <origin xyz="0 0 -${leglen/2}" rpy="0 ${pi/2} 0"/> -->
         </collision>

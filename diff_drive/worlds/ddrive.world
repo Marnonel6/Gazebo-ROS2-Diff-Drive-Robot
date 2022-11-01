@@ -239,14 +239,14 @@
       </include>
     </model>
 
-    <model name='Spiderman'>
+    <!-- <model name='Spiderman'>
       <include>
         <uri>
         https://fuel.gazebosim.org/1.0/GoogleResearch/models/SpiderMan_Titan_Hero_12Inch_Action_Figure_oo1qph4wwiW
         </uri>
         <pose>-8 4 0 0 0 0</pose>
       </include>
-    </model>
+    </model> -->
 
     <!-- <model name='Shelf'>
       <include>
@@ -277,7 +277,7 @@
     </model>  -->
 
 
-    <model name='Cereal'>
+    <!-- <model name='Cereal'>
       <include>
         <uri>
         https://fuel.gazebosim.org/1.0/GoogleResearch/models/Vans_Cereal_Honey_Nut_Crunch_11_oz_box
@@ -293,24 +293,24 @@
         </uri>
         <pose>2.6 -5.8 2 0 0 4</pose>
       </include>
-    </model>
+    </model> -->
 
     <!-- <model name='Walking_actor'> -->
-      <include>
+      <!-- <include>
           <uri>
           https://fuel.gazebosim.org/1.0/chapulina/models/Walking actor
           </uri>
           <pose>5 5 1 0 0 0</pose>
-      </include>
+      </include> -->
     <!-- </model> -->
 
     <!-- <model name='Weird_actor'> -->
-      <include>
+      <!-- <include>
           <uri>
           https://fuel.gazebosim.org/1.0/chapulina/models/actor - relative paths
           </uri>
           <pose>3 6 0 0 0 0</pose>
-      </include>
+      </include> -->
     <!-- </model> -->
 
 
