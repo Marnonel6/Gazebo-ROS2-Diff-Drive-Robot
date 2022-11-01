@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="ddrive">
+
+  <gazebo reference="base_link">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+
+  <!-- Link1 -->
+  <gazebo reference="right_wheel">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <gazebo reference="left_wheel">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <gazebo reference="right_caster">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <gazebo reference="left_caster">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+</robot>

@@ -20,9 +20,22 @@
 <xacro:property name="body_mass"  value="${ros__parameters['body_mass']}" />
 
 
-<xacro:property name="stem_lenght"  value="${platform_height-wheel_radius-wheel_radius-0.2-0.41-0.1}" />
+<xacro:include filename="$(find diff_drive)/ddrive.gazebo.xacro" />
 
 
+<material name = "red">
+    <color rgba ="1 0 0 1" />
+</material>
+
+<material name = "blue">
+    <color rgba ="0 0 1 1" />
+</material>
+
+<material name = "green">
+    <color rgba ="0 1 0 1" />
+</material>
+
+<!-- <link name="world"/>  -->
 
 <xacro:macro name="wheel_inertial" params="mass">
     <inertial>
@@ -43,12 +56,13 @@
 </xacro:macro>
 
 
-<xacro:macro name="wheel" params="prefix reflect">
+<xacro:macro name="wheel" params="prefix reflect color">
     <link name="${prefix}_wheel">
         <visual>
             <geometry>
                 <cylinder length="0.1" radius="0.3"/>
             </geometry>
+            <material name = "${color}" />
             <!-- <origin xyz="0 0 -${leglen/2}" rpy="0 ${pi/2} 0"/> -->
             <!-- <material name="white"/> -->
         </visual>
@@ -71,14 +85,14 @@
 
 
 
-<xacro:macro name="caster" params="prefix reflect">
+<xacro:macro name="caster" params="prefix reflect color">
     <link name="${prefix}_caster">
         <visual>
             <geometry>
                 <cylinder length="0.1" radius="0.1"/>
             </geometry>
             <!-- <origin xyz="0 0 -${leglen/2}" rpy="0 ${pi/2} 0"/> -->
-            <material name="white"/>
+            <material name = "${color}" />
         </visual>
         <collision>
             <geometry>
@@ -89,12 +103,12 @@
         <xacro:caster_inertial mass="${caster_mass}"/>
     </link>
 
-    <joint name="base_link_to_${prefix}_caster" type="continuous">
+    <!-- <joint name="base_link_to_${prefix}_caster" type="continuous">
         <parent link="base_link"/>
         <child link="${prefix}_caster"/>
         <axis xyz="0 0 1"/>
         <origin rpy="0 1.57075 0" xyz="0 -${body_x/2 + caster_radius*2} ${reflect*(body_z/2 + caster_radius)}"/>
-    </joint>
+    </joint> -->
 
     <joint name="base_link_to_${prefix}_caster_turn" type="continuous">
         <parent link="base_link"/>
@@ -111,6 +125,7 @@
       <geometry>
         <box size="${body_x} ${body_y} ${body_z}"/>
       </geometry>
+      <material name = "red" />
     </visual>
     <collision>
       <geometry>
@@ -121,10 +136,10 @@
   </link>
 
 
-<xacro:wheel prefix="right" reflect="1" />
-<xacro:wheel prefix="left" reflect="-1" />
+<xacro:wheel prefix="right" reflect="1" color ="blue"/>
+<xacro:wheel prefix="left" reflect="-1" color ="blue"/>
 
-<xacro:caster prefix="top" reflect="1" />
-<xacro:caster prefix="bottom" reflect="-1" />
+<xacro:caster prefix="top" reflect="1" color ="green"/>
+<xacro:caster prefix="bottom" reflect="-1" color ="green"/>
 
 </robot>

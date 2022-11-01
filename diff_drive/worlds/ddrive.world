@@ -267,14 +267,14 @@
     </model> 
 
 
-    <model name='House'>
+    <!-- <model name='House'>
       <include>
         <uri>
         https://fuel.gazebosim.org/1.0/OpenRobotics/models/Collapsed House
         </uri>
         <pose>-2.1 -3.9 0 0 0 0</pose>
       </include>
-    </model> 
+    </model>  -->
 
 
     <model name='Cereal'>
