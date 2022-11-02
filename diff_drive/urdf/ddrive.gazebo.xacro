@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="ddrive">
+<robot>
 
-  <gazebo reference="base_link">
+
+  <!-- <gazebo reference="base_link">
     <material>Gazebo/Blue</material>
   </gazebo>
 
-  <!-- Link1 -->
   <gazebo reference="right_wheel">
     <material>Gazebo/Orange</material>
   </gazebo>
@@ -16,10 +16,27 @@
 
   <gazebo reference="right_caster">
     <material>Gazebo/Red</material>
+    <mu1>0.0</mu1>
+    <mu2>0.0</mu2>
   </gazebo>
 
   <gazebo reference="left_caster">
     <material>Gazebo/Red</material>
-  </gazebo>
+    <mu1>0.0</mu1>
+    <mu2>0.0</mu2>
+  </gazebo> -->
 
+  <gazebo>
+    <plugin
+      filename="libignition-gazebo-diff-drive-system.so"
+      name="ignition::gazebo::systems::DiffDrive">
+      <left_joint>base_link_to_left_wheel</left_joint>
+      <right_joint>base_link_to_right_wheel</right_joint>
+      <wheel_separation>0.8</wheel_separation>
+      <wheel_radius>0.3</wheel_radius>
+      <odom_publish_frequency>100</odom_publish_frequency>
+      <!-- <topic>/model/my_custom_model/cmd_vel</topic> -->
+      <!-- <topic>/cmd_vel</topic> -->
+    </plugin>
+  </gazebo>
 </robot>
