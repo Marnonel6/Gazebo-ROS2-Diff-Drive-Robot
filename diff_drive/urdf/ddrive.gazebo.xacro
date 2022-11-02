@@ -36,7 +36,7 @@
       <wheel_radius>0.3</wheel_radius>
       <odom_publish_frequency>100</odom_publish_frequency>
       <!-- <topic>/model/my_custom_model/cmd_vel</topic> -->
-      <!-- <topic>/cmd_vel</topic> -->
+      <topic>/cmd_vel</topic>
     </plugin>
   </gazebo>
 </robot>

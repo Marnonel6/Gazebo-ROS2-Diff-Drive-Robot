@@ -66,6 +66,7 @@ def generate_launch_description():
             }.items()
     )
 
+
     # world_path
 
 
@@ -124,8 +125,12 @@ def generate_launch_description():
                     '-Y', '3.4',
                     '-topic', '/robot_description'],
                  output='screen')
-            
 
+    bridge_node = Node(
+            package='ros_gz_bridge',
+            executable='parameter_bridge',
+            name='bridge_node',
+            arguments=["/cmd_vel@geometry_msgs/msg/Twist@ignition.msgs.Twist"])
 
 
     # # Create the launch description and populate
@@ -146,7 +151,8 @@ def generate_launch_description():
         model_arg,
         gz_sim,
         robot_state_publisher,
-        spawn
+        spawn,
+        bridge_node
 
     ])
 
