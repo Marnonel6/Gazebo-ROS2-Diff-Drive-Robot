@@ -239,32 +239,23 @@
       </include>
     </model>
 
-    <!-- <model name='SUV'>
+    <model name='SUV'>
       <include>
         <uri>
         https://fuel.gazebosim.org/1.0/OpenRobotics/models/SUV
         </uri>
         <pose>-8 7 0 0 0 -1.57079632679</pose>
       </include>
-    </model> -->
+    </model>
 
-    <!-- <model name='Spiderman'>
+    <model name='Spiderman'>
       <include>
         <uri>
         https://fuel.gazebosim.org/1.0/GoogleResearch/models/SpiderMan_Titan_Hero_12Inch_Action_Figure_oo1qph4wwiW
         </uri>
         <pose>-8 4 0 0 0 0</pose>
       </include>
-    </model> -->
-
-    <!-- <model name='Shelf'>
-      <include>
-        <uri>
-        https://fuel.gazebosim.org/1.0/MovAi/models/shelf
-        </uri>
-        <pose> 5 -5 0 0 0</pose>
-      </include>
-    </model> -->
+    </model>
 
     <!-- <model name='Wheelchair'>
       <include>
@@ -293,9 +284,9 @@
         </uri>
         <pose>-8 -8 2 0 0 2</pose>
       </include>
-    </model>
+    </model> -->
 
-    <model name='Haircolor'>
+    <!-- <model name='Haircolor'>
       <include>
         <uri>
         https://fuel.gazebosim.org/1.0/GoogleResearch/models/Just_For_Men_Mustache_Beard_Brushin_Hair_Color_Gel_Kit_Jet_Black_M60

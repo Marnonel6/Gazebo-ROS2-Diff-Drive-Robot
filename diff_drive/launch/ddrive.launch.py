@@ -127,9 +127,9 @@ def generate_launch_description():
     spawn = Node(package='ros_ign_gazebo', executable='create',
                  arguments=[
                     '-name', 'my_custom_model',
-                    '-x', '1.2',
+                    '-x', '4.0',
                     '-z', '1.0',
-                    '-Y', '3.4',
+                    '-Y', '4.0',
                     '-topic', '/robot_description'],
                  output='screen')
 
