@@ -26,7 +26,7 @@ setup(
     license='MIT',
     tests_require=['pytest'],
     entry_points={
-        'console_scripts': [
+        'console_scripts': ['flip=diff_drive.flip:flip_node_entry'
         ],
     },
 )

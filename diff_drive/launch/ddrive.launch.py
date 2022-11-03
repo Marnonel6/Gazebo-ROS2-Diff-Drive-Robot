@@ -105,6 +105,13 @@ def generate_launch_description():
     #     '</link>'\
     #     '</robot>'
 
+
+    """Use
+    ros2 run teleop_twist_keyboard teleop_twist_keyboard
+    ros2 launch diff_drive ddrive.launch.py
+
+    """
+
     # Robot state publisher
     params = {'use_sim_time': True, 'robot_description': robot_desc}
 
@@ -121,7 +128,7 @@ def generate_launch_description():
                  arguments=[
                     '-name', 'my_custom_model',
                     '-x', '1.2',
-                    '-z', '20.0',
+                    '-z', '1.0',
                     '-Y', '3.4',
                     '-topic', '/robot_description'],
                  output='screen')
@@ -131,6 +138,14 @@ def generate_launch_description():
             executable='parameter_bridge',
             name='bridge_node',
             arguments=["/cmd_vel@geometry_msgs/msg/Twist@ignition.msgs.Twist"])
+
+
+    flip_robot_node = Node(
+        package='diff_drive',
+        executable='flip',
+        name='flip'
+        # parameters=[yaml_path]
+    )
 
 
     # # Create the launch description and populate
@@ -152,7 +167,8 @@ def generate_launch_description():
         gz_sim,
         robot_state_publisher,
         spawn,
-        bridge_node
+        bridge_node,
+        flip_robot_node
 
     ])
 

@@ -12,19 +12,19 @@
 
   <gazebo reference="left_wheel">
     <material>Gazebo/Orange</material>
-  </gazebo>
+  </gazebo> -->
 
   <gazebo reference="right_caster">
-    <material>Gazebo/Red</material>
+    <!-- <material>Gazebo/Red</material> -->
     <mu1>0.0</mu1>
     <mu2>0.0</mu2>
   </gazebo>
 
   <gazebo reference="left_caster">
-    <material>Gazebo/Red</material>
+    <!-- <material>Gazebo/Red</material> -->
     <mu1>0.0</mu1>
     <mu2>0.0</mu2>
-  </gazebo> -->
+  </gazebo>
 
   <gazebo>
     <plugin
