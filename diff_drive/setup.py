@@ -22,7 +22,8 @@ setup(
     zip_safe=True,
     maintainer='Marno Nel',
     maintainer_email='marnonel2023@u.northwestern.edu',
-    description='TODO: Package description',
+    description='Open gazebo, import a .world and .urdf.xacro file and run the flip node to \
+        flip the robot',
     license='MIT',
     tests_require=['pytest'],
     entry_points={

@@ -22,17 +22,7 @@ PARAMETERS:
 
 import rclpy
 from rclpy.node import Node
-from tf2_ros.static_transform_broadcaster import StaticTransformBroadcaster
-from tf2_ros import TransformBroadcaster
-from geometry_msgs.msg import TransformStamped, Point
-from math import atan2, cos, sin
 from geometry_msgs.msg import Twist, Vector3
-from turtlesim.msg import Pose
-from tf2_ros.buffer import Buffer
-from tf2_ros.transform_listener import TransformListener
-from enum import Enum, auto
-from sensor_msgs.msg import JointState
-from rcl_interfaces.msg import ParameterDescriptor
 from nav_msgs.msg import Odometry
 
 

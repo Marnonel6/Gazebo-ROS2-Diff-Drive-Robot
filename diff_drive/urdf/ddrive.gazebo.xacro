@@ -1,27 +1,12 @@
 <?xml version="1.0"?>
 <robot>
 
-
-  <!-- <gazebo reference="base_link">
-    <material>Gazebo/Blue</material>
-  </gazebo>
-
-  <gazebo reference="right_wheel">
-    <material>Gazebo/Orange</material>
-  </gazebo>
-
-  <gazebo reference="left_wheel">
-    <material>Gazebo/Orange</material>
-  </gazebo> -->
-
   <gazebo reference="right_caster">
-    <!-- <material>Gazebo/Red</material> -->
     <mu1>0.0</mu1>
     <mu2>0.0</mu2>
   </gazebo>
 
   <gazebo reference="left_caster">
-    <!-- <material>Gazebo/Red</material> -->
     <mu1>0.0</mu1>
     <mu2>0.0</mu2>
   </gazebo>
@@ -35,7 +20,6 @@
       <wheel_separation>0.8</wheel_separation>
       <wheel_radius>0.3</wheel_radius>
       <odom_publish_frequency>100</odom_publish_frequency>
-      <!-- <topic>/model/my_custom_model/cmd_vel</topic> -->
       <topic>/cmd_vel</topic>
     </plugin>
   </gazebo>

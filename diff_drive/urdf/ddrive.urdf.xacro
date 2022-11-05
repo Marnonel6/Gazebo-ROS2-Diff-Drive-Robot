@@ -22,9 +22,6 @@
 
 <xacro:include filename="$(find diff_drive)/ddrive.gazebo.xacro" />
 
-<!-- <link name="world"/>  -->
-
-
 <material name = "red">
     <color rgba ="1 0 0 1" />
 </material>
@@ -65,14 +62,11 @@
                 <cylinder length="0.1" radius="0.3"/>
             </geometry>
             <material name = "${color}" />
-            <!-- <origin xyz="0 0 -${leglen/2}" rpy="0 ${pi/2} 0"/> -->
-            <!-- <material name="white"/> -->
         </visual>
         <collision>
             <geometry>
                 <cylinder length="${wheel_length}" radius="${wheel_radius}"/>
             </geometry>
-            <!-- <origin xyz="0 0 -${leglen/2}" rpy="0 ${pi/2} 0"/> -->
         </collision>
         <xacro:wheel_inertial mass="${wheel_mass}"/>
     </link>
@@ -91,18 +85,14 @@
     <link name="${prefix}_caster">
         <visual>
             <geometry>
-                <!-- <cylinder length="0.1" radius="0.1"/> -->
                 <sphere radius="${caster_radius}"/>
             </geometry>
-            <!-- <origin xyz="0 0 -${leglen/2}" rpy="0 ${pi/2} 0"/> -->
             <material name = "${color}" />
         </visual>
         <collision>
             <geometry>
-                <!-- <cylinder length="${caster_length}" radius="${caster_radius}"/> -->
                 <sphere radius="${caster_radius}"/>
             </geometry>
-            <!-- <origin xyz="0 0 -${leglen/2}" rpy="0 ${pi/2} 0"/> -->
         </collision>
         <xacro:caster_inertial mass="${caster_mass}"/>
     </link>
@@ -113,13 +103,6 @@
         <axis xyz="0 0 1"/>
         <origin rpy="0 1.57075 0" xyz="0 -${body_x/2 - 0.1} ${reflect*(body_z/2 + caster_radius)}"/>
     </joint>
-
-    <!-- <joint name="base_link_to_${prefix}_caster_turn" type="continuous">
-        <parent link="base_link"/>
-        <child link="${prefix}_caster"/>
-        <axis xyz="1 0 0"/>
-        <origin rpy="0 1.57075 0" xyz="0 -${body_x/2 + caster_radius*2} ${reflect*(body_z/2 + caster_radius)}"/>
-    </joint> -->
 </xacro:macro>
 
 

@@ -3,7 +3,7 @@
 <package format="3">
   <name>diff_drive</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
+  <description>Open gazebo, import a .world and .urdf.xacro file and run the flip node to flip the robot</description>
   <maintainer email="marnonel2023@u.northwestern.edu">Marno Nel</maintainer>
   <license>MIT</license>
 
