@@ -56,7 +56,7 @@ class Flip_node(Node):
         self.pub_Flip = self.create_publisher(Twist, "/cmd_vel", 10)
         self.Flip_Vel = Twist()
 
-        self.maxVelocity = 3.0
+        self.maxVelocity = 2.0
         self.time_between_flips = 2.0 # Amount of seconds
 
 

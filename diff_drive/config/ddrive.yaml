@@ -5,7 +5,6 @@
     wheel_length: 0.1
     wheel_mass: 0.5 # 2.0
     caster_radius: 0.1
-    caster_length: 0.1
     caster_mass: 0.1 # 1.0
     # max_velocity: 3.0
     # gravity: 9.8

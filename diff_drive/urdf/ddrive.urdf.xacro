@@ -12,7 +12,6 @@
 <xacro:property name="wheel_length"  value="${ros__parameters['wheel_length']}" />
 <xacro:property name="wheel_mass"  value="${ros__parameters['wheel_mass']}" />
 <xacro:property name="caster_radius"  value="${ros__parameters['caster_radius']}" />
-<xacro:property name="caster_length"  value="${ros__parameters['caster_length']}" />
 <xacro:property name="caster_mass"  value="${ros__parameters['caster_mass']}" />
 <xacro:property name="body_x"  value="${ros__parameters['body_x']}" />
 <xacro:property name="body_y"  value="${ros__parameters['body_y']}" />
@@ -39,18 +38,27 @@
 <xacro:macro name="wheel_inertial" params="mass">
     <inertial>
             <mass value="${mass}" />
-            <inertia ixx="1e-3" ixy="0.0" ixz="0.0"
-                 iyy="1e-3" iyz="0.0"
-                 izz="1e-3" />
+            <inertia ixx="${mass*(3*wheel_radius**2 + wheel_length**2)/12}" ixy="0.0" ixz="0.0"
+                 iyy="${mass*(3*wheel_radius**2 + wheel_length**2)/12}" iyz="0.0"
+                 izz="${mass*(wheel_radius**2)/2}" />
     </inertial>
 </xacro:macro>
 
 <xacro:macro name="caster_inertial" params="mass">
     <inertial>
             <mass value="${mass}" />
-            <inertia ixx="1e-3" ixy="0.0" ixz="0.0"
-                 iyy="1e-3" iyz="0.0"
-                 izz="1e-3" />
+            <inertia ixx="${mass*(caster_radius**2 + caster_radius**2)/5}" ixy="0.0" ixz="0.0"
+                 iyy="${mass*(caster_radius**2 + caster_radius**2)/5}" iyz="0.0"
+                 izz="${mass*(caster_radius**2 + caster_radius**2)/5}"/>
+    </inertial>
+</xacro:macro>
+
+<xacro:macro name="body_inertial" params="mass">
+    <inertial>
+            <mass value="${mass}" />
+            <inertia ixx="${mass*(body_y**2 + body_z**2)/12}" ixy="0.0" ixz="0.0"
+                 iyy="${mass*(body_x**2 + body_z**2)/12}" iyz="0.0"
+                 izz="${mass*(body_x**2 + body_y**2)/12}" />
     </inertial>
 </xacro:macro>
 
@@ -119,7 +127,7 @@
         <box size="${body_x} ${body_y} ${body_z}"/>
       </geometry>
     </collision>
-    <xacro:caster_inertial mass="${body_mass}"/>
+    <xacro:body_inertial mass="${body_mass}"/>
   </link>
 
 
