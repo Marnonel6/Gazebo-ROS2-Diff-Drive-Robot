@@ -23,4 +23,14 @@
       <topic>/cmd_vel</topic>
     </plugin>
   </gazebo>
+
+
+  <gazebo>
+    <plugin
+      filename="libignition-gazebo-joint-state-publisher-system.so"
+      name="ignition::gazebo::systems::JointStatePublisher">
+    </plugin>
+  </gazebo>
+
+
 </robot>

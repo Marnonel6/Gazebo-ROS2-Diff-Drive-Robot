@@ -14,7 +14,7 @@ def generate_launch_description():
 
     use_jsp = DeclareLaunchArgument(
         name='use_jsp',
-        default_value='gui',
+        default_value='none',
         choices=[
             'gui',
             'jsp',
