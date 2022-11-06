@@ -83,7 +83,7 @@
         <parent link="base_link"/>
         <child link="${prefix}_wheel"/>
         <axis xyz="0 0 1"/>
-        <origin rpy="0 1.57075 0" xyz="${reflect*(body_x/2 + wheel_length/2)} ${body_x/2 - 0.2} 0"/>
+        <origin rpy="1.57075 1.57075 0" xyz="${body_x/2 - 0.2} ${reflect*(body_x/2 + wheel_length/2)} 0"/>
     </joint>
 </xacro:macro>
 
@@ -109,7 +109,7 @@
         <parent link="base_link"/>
         <child link="${prefix}_caster"/>
         <axis xyz="0 0 1"/>
-        <origin rpy="0 1.57075 0" xyz="0 -${body_x/2 - 0.1} ${reflect*(body_z/2 + caster_radius)}"/>
+        <origin rpy="0 1.57075 1.57075" xyz="-${body_x/2 - 0.1} 0 ${reflect*(body_z/2 + caster_radius)}"/>
     </joint>
 </xacro:macro>
 
@@ -121,11 +121,13 @@
         <box size="${body_x} ${body_y} ${body_z}"/>
       </geometry>
       <material name = "red" />
+       <origin rpy="0 0 1.57075" xyz="0 0 0"/>
     </visual>
     <collision>
       <geometry>
         <box size="${body_x} ${body_y} ${body_z}"/>
       </geometry>
+      <origin rpy="0 0 1.57075" xyz="0 0 0"/>
     </collision>
     <xacro:body_inertial mass="${body_mass}"/>
   </link>

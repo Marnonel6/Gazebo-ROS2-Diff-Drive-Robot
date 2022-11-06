@@ -65,7 +65,7 @@ def generate_launch_description():
                     '-name', 'my_custom_model',
                     '-x', '3.0',
                     '-z', '1.0',
-                    '-Y', '3.0',
+                    '-y', '1.0',
                     '-topic', '/robot_description'],
                  output='screen')
 
@@ -74,12 +74,11 @@ def generate_launch_description():
             executable='parameter_bridge',
             name='bridge_node',
             arguments=["/cmd_vel@geometry_msgs/msg/Twist@ignition.msgs.Twist",
-                       "/model/my_custom_model/odometry@nav_msgs/msg/Odometry@ignition.msgs.Odometry",
+                       "/odom@nav_msgs/msg/Odometry@ignition.msgs.Odometry",
                         '/world/visualize_lidar_world/model/my_custom_model/joint_state@sensor_msgs/msg/JointState[ignition.msgs.Model',
-                        '/model/my_custom_model/tf@tf2_msgs/msg/TFMessage[ignition.msgs.Pose_V'
+                        '/tf@tf2_msgs/msg/TFMessage[ignition.msgs.Pose_V'
                         ],
-                        remappings=[('/world/visualize_lidar_world/model/my_custom_model/joint_state', '/joint_states'),
-                                     ('/model/my_custom_model/tf', '/tf')])
+                        remappings=[('/world/visualize_lidar_world/model/my_custom_model/joint_state', '/joint_states')])
 
 
     flip_robot_node = Node(
