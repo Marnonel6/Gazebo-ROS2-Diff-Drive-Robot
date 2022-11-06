@@ -74,7 +74,8 @@ def generate_launch_description():
             executable='parameter_bridge',
             name='bridge_node',
             arguments=["/cmd_vel@geometry_msgs/msg/Twist@ignition.msgs.Twist",
-                       "/odom@nav_msgs/msg/Odometry@ignition.msgs.Odometry",
+                    #    "/odom@nav_msgs/msg/Odometry@ignition.msgs.Odometry",
+                       '/model/my_custom_model/odometry@nav_msgs/msg/Odometry@ignition.msgs.Odometry',
                         '/world/visualize_lidar_world/model/my_custom_model/joint_state@sensor_msgs/msg/JointState[ignition.msgs.Model',
                         '/tf@tf2_msgs/msg/TFMessage[ignition.msgs.Pose_V'
                         ],
