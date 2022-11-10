@@ -19,31 +19,26 @@ class Flip_node(Node):
 
     def __init__(self):
         super().__init__('flip')
-
-
+        # SPublsiher
         self.pub_Flip = self.create_publisher(Twist, "cmd_vel", 10)
         self.Flip_Vel = Twist()
-
+        # Max velocity
         self.maxVelocity = 2.0
-        self.time_between_flips = 2.0 # Amount of seconds
-
-
+        self.time_between_flips = 2.0  # Amount of seconds
 
         # Create a timer to do the rest of the transforms.
         self.tmr = self.create_timer(0.01, self.timer_callback)
 
         self.total_time = 0.0
 
-
-    def flip_robot(self,direction):
+    def flip_robot(self, direction):
         """
         Changes the x velocity direction of the car according to the direction variable.
         """
-        self.Flip_Vel = Twist(linear=Vector3(x=direction*self.maxVelocity, y=0.0, z=0.0),\
-             angular=Vector3(x=0.0, y=0.0, z=0.0))
+        self.Flip_Vel = Twist(linear=Vector3(x=direction*self.maxVelocity, y=0.0, z=0.0),
+                              angular=Vector3(x=0.0, y=0.0, z=0.0))
 
         return self.Flip_Vel
-
 
     def timer_callback(self):
         """
@@ -51,17 +46,16 @@ class Flip_node(Node):
         """
         self.total_time += 0.01
         # Move in one direction for self.time_between_flips
-        if self.total_time < self.time_between_flips: 
+        if self.total_time < self.time_between_flips:
             direction = 1
             self.pub_Flip.publish(self.flip_robot(direction))
             # Move in other direction (Thus flip) for self.time_between_flips
         elif self.total_time >= self.time_between_flips and \
-                                                self.total_time < self.time_between_flips*2:
+                self.total_time < self.time_between_flips*2:
             direction = -1
             self.pub_Flip.publish(self.flip_robot(direction))
         else:
             self.total_time = 0
-
 
 
 def flip_node_entry(args=None):

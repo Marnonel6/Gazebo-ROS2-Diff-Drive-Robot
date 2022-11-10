@@ -9,6 +9,7 @@ from launch.substitutions import Command, LaunchConfiguration
 from launch_ros.actions import Node
 from launch_ros.parameter_descriptions import ParameterValue
 
+
 def generate_launch_description():
     urdf_tutorial_path = get_package_share_path('diff_drive')
     default_model_path = urdf_tutorial_path / 'ddrive.urdf.xacro'

@@ -13,6 +13,7 @@ from launch.substitutions import Command, LaunchConfiguration
 from launch_ros.actions import Node
 from launch_ros.parameter_descriptions import ParameterValue
 
+
 def generate_launch_description():
     pkg_gazebo_ros = get_package_share_directory('ros_ign_gazebo')
     urdf_tutorial_path = get_package_share_path('diff_drive')
@@ -67,18 +68,16 @@ def generate_launch_description():
             name='bridge_node',
             arguments=['/cmd_vel@geometry_msgs/msg/Twist@ignition.msgs.Twist',
                        '/model/my_custom_model/odometry@nav_msgs/msg/Odometry@ignition.msgs.Odometry',
-                        '/world/visualize_lidar_world/model/my_custom_model/joint_state@sensor_msgs/msg/JointState[ignition.msgs.Model',
-                        '/tf@tf2_msgs/msg/TFMessage[ignition.msgs.Pose_V'
-                        ],
-                        remappings=[('/world/visualize_lidar_world/model/my_custom_model/joint_state', '/joint_states')])
-
+                       '/world/visualize_lidar_world/model/my_custom_model/joint_state@sensor_msgs/msg/JointState[ignition.msgs.Model',
+                       '/tf@tf2_msgs/msg/TFMessage[ignition.msgs.Pose_V'
+                       ],
+                       remappings=[('/world/visualize_lidar_world/model/my_custom_model/joint_state', '/joint_states')])
 
     flip_robot_node = Node(
         package='diff_drive',
         executable='flip',
         name='flip'
     )
-
 
     ddrive_launch = IncludeLaunchDescription(PythonLaunchDescriptionSource(
         [os.path.join(get_package_share_directory('diff_drive')), '/ddrive_rviz.launch.py']))
@@ -92,6 +91,4 @@ def generate_launch_description():
         bridge_node,
         flip_robot_node,
         ddrive_launch
-
     ])
-
