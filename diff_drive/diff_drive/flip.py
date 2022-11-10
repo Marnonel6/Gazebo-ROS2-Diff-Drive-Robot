@@ -73,23 +73,16 @@ class Flip_node(Node):
         and the angle between the turtle and the goal pose to move the turtle from its
         current position to the goal position.
         """
-
         self.Flip_Vel = Twist(linear=Vector3(x=direction*self.maxVelocity, y=0.0, z=0.0), angular=Vector3(x=0.0, y=0.0, z=0.0))
 
-            
-        # Get the vector in x and y of the max velocity
         return self.Flip_Vel
-
-
 
 
     def timer_callback(self):
         """
-        State Machine
+        Timer Callback
         """
-
         self.total_time += 0.01
-
         # Move in one direction for self.time_between_flips
         if self.total_time < self.time_between_flips: 
             direction = 1
@@ -101,10 +94,6 @@ class Flip_node(Node):
             self.pub_Flip.publish(self.flip_robot(direction))
         else:
             self.total_time = 0
-
-
-
-
 
 
 

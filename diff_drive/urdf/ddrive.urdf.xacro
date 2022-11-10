@@ -5,9 +5,6 @@
 <xacro:property name="props" value="${load_yaml(yaml_file)}" />
 <xacro:property name="start"  value="${props['/**']}" />
 <xacro:property name="ros__parameters"  value="${start['ros__parameters']}" />
-
-<xacro:property name="platform_height"  value="${ros__parameters['platform_height']}" />
-
 <xacro:property name="wheel_radius"  value="${ros__parameters['wheel_radius']}" />
 <xacro:property name="wheel_length"  value="${ros__parameters['wheel_length']}" />
 <xacro:property name="wheel_mass"  value="${ros__parameters['wheel_mass']}" />

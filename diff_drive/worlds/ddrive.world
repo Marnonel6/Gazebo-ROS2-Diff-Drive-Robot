@@ -5,10 +5,7 @@
       <max_step_size>0.001</max_step_size>
       <real_time_factor>1.0</real_time_factor>
     </physics>
-
-    <!--
-      My Code
-    -->
+    
     <model name='Jersey_Barrier1'>
       <include>
         <uri>
@@ -71,11 +68,6 @@
         <pose>-8 4 0 0 0 0</pose>
       </include>
     </model>
-
-<!-- 
-  Command to run:
-  ign gazebo -v 4 -r src/homework3-Marnonel6/diff_drive/worlds/ddrive.world
- -->
 
   </world>
 </sdf>

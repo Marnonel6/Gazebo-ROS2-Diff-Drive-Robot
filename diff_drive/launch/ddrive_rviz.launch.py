@@ -7,21 +7,30 @@ from launch_ros.actions import Node
 from launch_ros.parameter_descriptions import ParameterValue
 
 
+"""
+ros2 launch diff_drive ddrive_rviz.launch.py view_only:=true
+"""
+
+
 def generate_launch_description():
     urdf_tutorial_path = get_package_share_path('diff_drive')
     default_model_path = urdf_tutorial_path / 'ddrive.urdf.xacro'
-    default_rviz_config_path = urdf_tutorial_path / 'ddrive_urdf.rviz'
+    default_rviz_config_path = urdf_tutorial_path / 'ddrive_urdf_odom.rviz'
+    default_rviz_config_path2 = urdf_tutorial_path / 'ddrive_urdf.rviz'
 
-    use_jsp = DeclareLaunchArgument(
-        name='use_jsp',
-        default_value='none',
+    view_only = DeclareLaunchArgument(
+        name='view_only',
+        default_value='false',
         choices=[
-            'gui',
-            'jsp',
-            'none'],
-        description='Flag to choose joint_state_publisher')
+            'false',
+            'true'],
+        description='Flag to choose rviz config')
     model_arg = DeclareLaunchArgument(name='model', default_value=str(
         default_model_path), description='Absolute path to robot urdf file')
+    rviz_arg2 = DeclareLaunchArgument(
+        name='rvizconfig2',
+        default_value=str(default_rviz_config_path2),
+        description='Absolute path to rviz config file')
     rviz_arg = DeclareLaunchArgument(
         name='rvizconfig',
         default_value=str(default_rviz_config_path),
@@ -35,18 +44,10 @@ def generate_launch_description():
         parameters=[{'robot_description': robot_description}]
     )
 
-    # Depending on gui parameter, either launch joint_state_publisher or
-    # joint_state_publisher_gui or None
-    joint_state_publisher_node = Node(
-        package='joint_state_publisher',
-        executable='joint_state_publisher',
-        condition=LaunchConfigurationEquals('use_jsp', 'jsp')
-    )
-
     joint_state_publisher_gui_node = Node(
         package='joint_state_publisher_gui',
         executable='joint_state_publisher_gui',
-        condition=LaunchConfigurationEquals('use_jsp', 'gui')
+        condition=LaunchConfigurationEquals('view_only', 'true')
     )
 
     rviz_node = Node(
@@ -55,14 +56,25 @@ def generate_launch_description():
         name='rviz2',
         output='screen',
         arguments=['-d', LaunchConfiguration('rvizconfig')],
+        condition=LaunchConfigurationEquals('view_only', 'false')
+    )
+
+    rviz_node2 = Node(
+        package='rviz2',
+        executable='rviz2',
+        name='rviz2',
+        output='screen',
+        arguments=['-d', LaunchConfiguration('rvizconfig2')],
+        condition=LaunchConfigurationEquals('view_only', 'true')
     )
 
     return LaunchDescription([
-        use_jsp,
+        view_only,
         model_arg,
         rviz_arg,
-        joint_state_publisher_node,
+        rviz_arg2,
         joint_state_publisher_gui_node,
         robot_state_publisher_node,
-        rviz_node
+        rviz_node,
+        rviz_node2
     ])

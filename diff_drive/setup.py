@@ -15,6 +15,7 @@ setup(
                                     'urdf/ddrive.urdf.xacro',
                                     'urdf/ddrive.gazebo.xacro',
                                     'config/ddrive_urdf.rviz',
+                                    'config/ddrive_urdf_odom.rviz',
                                     'config/ddrive.yaml',
                                     'worlds/ddrive.world']),
                 ],
