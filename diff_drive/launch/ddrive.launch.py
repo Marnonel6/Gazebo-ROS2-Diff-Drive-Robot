@@ -1,10 +1,8 @@
-"""Launch Gazebo server and client with command line arguments."""
-"""Spawn robot from URDF file.
-
-CMD LINE 
-ros2 launch diff_drive ddrive.launch.py
 """
-
+Launch Gazebo server and client with command line arguments.
+Spawn robot from URDF file.
+Launch rviz with odom.
+"""
 import os
 from ament_index_python.packages import get_package_share_directory
 from ament_index_python.packages import get_package_share_path
@@ -42,11 +40,6 @@ def generate_launch_description():
     robot_desc = ParameterValue(
         Command(['xacro ', LaunchConfiguration('model')]), value_type=str)
 
-    """Use
-    ros2 run teleop_twist_keyboard teleop_twist_keyboard
-    ros2 launch diff_drive ddrive.launch.py
-    """
-
     # Robot state publisher
     params = {'use_sim_time': True, 'robot_description': robot_desc}
 
@@ -72,7 +65,7 @@ def generate_launch_description():
             package='ros_gz_bridge',
             executable='parameter_bridge',
             name='bridge_node',
-            arguments=["/cmd_vel@geometry_msgs/msg/Twist@ignition.msgs.Twist",
+            arguments=['/cmd_vel@geometry_msgs/msg/Twist@ignition.msgs.Twist',
                        '/model/my_custom_model/odometry@nav_msgs/msg/Odometry@ignition.msgs.Odometry',
                         '/world/visualize_lidar_world/model/my_custom_model/joint_state@sensor_msgs/msg/JointState[ignition.msgs.Model',
                         '/tf@tf2_msgs/msg/TFMessage[ignition.msgs.Pose_V'
