@@ -1,6 +1,4 @@
-"""
-Launch rviz and load config file.
-"""
+"""Launch rviz and load config file."""
 from ament_index_python.packages import get_package_share_path
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
@@ -11,6 +9,7 @@ from launch_ros.parameter_descriptions import ParameterValue
 
 
 def generate_launch_description():
+    """Launch file for only launching rviz with the URDF model."""
     urdf_tutorial_path = get_package_share_path('diff_drive')
     default_model_path = urdf_tutorial_path / 'ddrive.urdf.xacro'
     default_rviz_config_path = urdf_tutorial_path / 'ddrive_urdf_odom.rviz'

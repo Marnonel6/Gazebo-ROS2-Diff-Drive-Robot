@@ -1,7 +1,7 @@
 """
 Launch Gazebo server and client with command line arguments.
-Spawn robot from URDF file.
-Launch rviz with odom.
+
+Spawn robot from URDF file. Launch rviz with odom.
 """
 import os
 from ament_index_python.packages import get_package_share_directory
@@ -15,6 +15,7 @@ from launch_ros.parameter_descriptions import ParameterValue
 
 
 def generate_launch_description():
+    """Launch Gazebo and RVIZ with the URDF model."""
     pkg_gazebo_ros = get_package_share_directory('ros_ign_gazebo')
     urdf_tutorial_path = get_package_share_path('diff_drive')
     world_path = urdf_tutorial_path / 'ddrive.world'
@@ -67,11 +68,14 @@ def generate_launch_description():
             executable='parameter_bridge',
             name='bridge_node',
             arguments=['/cmd_vel@geometry_msgs/msg/Twist@ignition.msgs.Twist',
-                       '/model/my_custom_model/odometry@nav_msgs/msg/Odometry@ignition.msgs.Odometry',
-                       '/world/visualize_lidar_world/model/my_custom_model/joint_state@sensor_msgs/msg/JointState[ignition.msgs.Model',
+                       '/model/my_custom_model/odometry@nav_msgs/msg/' +
+                       'Odometry@ignition.msgs.Odometry',
+                       '/world/visualize_lidar_world/model/my_custom_model/' +
+                       'joint_state@sensor_msgs/msg/JointState[ignition.msgs.Model',
                        '/tf@tf2_msgs/msg/TFMessage[ignition.msgs.Pose_V'
                        ],
-                       remappings=[('/world/visualize_lidar_world/model/my_custom_model/joint_state', '/joint_states')])
+            remappings=[('/world/visualize_lidar_world/model/my_custom_model' +
+                         '/joint_state', '/joint_states')])
 
     flip_robot_node = Node(
         package='diff_drive',
