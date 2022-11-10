@@ -10,6 +10,6 @@ A node was created called flip that will publish a linear velocity that will occ
 
 3. Here is a video of the car flipping
 
-  [Robot_Catches_Brick.webm](https://user-images.githubusercontent.com/60977336/196852556-7bbca85f-46d4-4842-99ee-a81dd363eede.webm)
+  [Flipper.mp4](https://user-images.githubusercontent.com/60977336/201008422-60a2b429-58e1-496b-9c67-0b6132a3cd67.mp4)
 
 Worked With: `James, Alan, Ritika, Shantao`
