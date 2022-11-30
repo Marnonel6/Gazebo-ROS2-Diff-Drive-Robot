@@ -1,0 +1,6 @@
+2. Package does not properly setup gazebo asset paths:
+    https://nu-msr.github.io/ros_notes/ros2/simulation.html#orgec094d8
+
+PythonLaunchDescription is not needed because IncludeLaunchDescription can load python launch files
+
+ddrive_rviz.launch launches robot_state_publisher as does ddrive.launch.py so it would be better to just use ddrive_rviz.launch.py to do that and include it in the launchfile (I suspect that you may actually be launching two robot_state_publishers)
